@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/exo2.dir/main.cpp.o  -o exo2 
