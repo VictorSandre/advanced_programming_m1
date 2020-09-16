@@ -1,15 +1,16 @@
 //
-// Created by mc on 07/09/2020.
+// Created by victor SANDRE.
 //
 
-#ifndef TP1_IMAGE_H
-#define TP1_IMAGE_H
+#ifndef EXO3_IMAGE_H
+#define EXO3_IMAGE_H
 
-#include "Pixel.hpp"
+#include <ostream>
+#include "pixel.h"
 
 class Image {
 public:
-    Image(int height, int width);
+    Image(int height, int width, bool isGrey);
 
     Pixel getPixel(int poxX, int posY) const; //Première façon de faire le mutateur/accesseur.
     void setPixel(int posX, int posY, Pixel& pixel);
@@ -23,6 +24,8 @@ public:
     void setHeight(int height);
     void setWidth(int width);
 
+    friend std::ostream &operator<<(std::ostream &os, const Image &image);
+
     ~Image(); // Destructeur.
 
 private:
@@ -30,30 +33,36 @@ private:
     int width;
     Pixel ** pixels;
 
-    void initAllPixels();
+    void initAllGreyPixels();
+    void initAllColoredPixels();
 };
 
-Image::Image(int height, int width) {
+Image::Image(int height, int width, bool isGrey = true) {
     this->height = height;
     this->width = width;
-    initAllPixels();
+    if (isGrey)
+        initAllGreyPixels();//TODO demander au prof: ici je fais un downcast et non un upcast non ? comment faire du coup ?
+    else
+        initAllColoredPixels();
 }
 
-/**
- * Allocation et initialisation du tableau de pixels.
- */
-void Image::initAllPixels() {
+void Image::initAllGreyPixels() {
     //Allocation d'un tableau 2D (donc un tableau de tableaux).
-    pixels = new Pixel*[height]; // Allocation des lignes.
+    pixels = (Pixel**) new GreyPixel*[height]; // Allocation des lignes.
 
     //Allocation des colones.
-    for (int i = 0; i < height; ++i) {
-        pixels[i] = new Pixel[width];
-        // Initialisation de chaque pixel.
-        for (int j = 0; j < width; ++j) {
-            Pixel pixel;
-            pixels[i][j] = pixel;
-        }
+    for (int row = 0; row < height; ++row) {
+        pixels[row] = (Pixel*) new GreyPixel[width];
+    }
+}
+
+void Image::initAllColoredPixels() {
+    //Allocation d'un tableau 2D (donc un tableau de tableaux).
+    pixels = (Pixel**) new ColoredPixel*[height]; // Allocation des lignes.
+
+    //Allocation des colones.
+    for (int row = 0; row < height; ++row) {
+        pixels[row] = (Pixel*) new ColoredPixel[width];
     }
 }
 
@@ -120,5 +129,14 @@ Image::~Image() {
     delete [] pixels;
 }
 
+std::ostream &operator<<(std::ostream &os, const Image &image) {
+    for (int row = 0; row < image.width; ++row) {
+        for (int column = 0; column < image.height; ++column) {
+            os << image.pixels[column][row];
+        }
+        os << std::endl;
+    }
+    return os;
+}
 
-#endif //TP1_IMAGE_H
+#endif //EXO3_IMAGE_H

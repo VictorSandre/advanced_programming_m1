@@ -16,7 +16,7 @@ void updateImageRandomly(Image& image);
 int main() {
     Image image(5, 4);
 
-    // Nombre d'itération pour la boucle a canger. Flemme de faire un cin>>.
+    // Nombre d'itération pour la boucle a changer. Flemme de faire un cin>>.
     const int n = 100;
 
     for (int i = 0; i < n; ++i) {
