@@ -10,6 +10,7 @@ class Generator {
 public:
     Generator(int value);
 
+    // Surcharge de l'operateur '()' pour en faire un foncteur(objet fonction).
     int operator()();
 
 private:

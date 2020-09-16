@@ -1,5 +1,5 @@
 //
-// Created by mc on 09/09/2020.
+// Created by victor SANDRE.
 //
 
 #ifndef EXO2_LACLASSE_H

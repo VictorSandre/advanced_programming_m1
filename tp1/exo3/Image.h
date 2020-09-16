@@ -1,5 +1,5 @@
 //
-// Created by mc on 07/09/2020.
+// Created by victor SANDRE.
 //
 
 #ifndef TP1_IMAGE_H
