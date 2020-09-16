@@ -38,7 +38,7 @@ Iterator<T>::Iterator(const T & currentElementPtr)
 
 template<typename T>
 Iterator<T> &Iterator<T>::operator=(const Iterator<T> &iterator) {
-    _currentElementPtr = iterator._currentElementPtr;//TODO verifier que ici on ne fait pas de copie ou s' faut en faire une
+    _currentElementPtr = iterator._currentElementPtr;//TODO ne faut il pas plutot faire une copie à la place ?
     return *this;
 }
 

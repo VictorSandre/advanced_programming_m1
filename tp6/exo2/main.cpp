@@ -22,6 +22,7 @@ int main() {
     }
     std::cout << "]" << std::endl;
 
-    //TODO demander comment faire un: Array<int,6>::Iterator it = array.begin();
+    // TODO demander comment faire un: Array<int,6>::Iterator it = array.begin();
+    //  je crois qu'il faut déclarer l'itérateur dans la classe array.
     return 0;
 }

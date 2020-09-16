@@ -22,7 +22,8 @@ int main() {
     std::cout << "array:" << array;
     std::cout << "array[0]:" << array[0] << std::endl;
 
-    Array<char,3> array_char("toto");
+    int toto[] = {1,2,9,4};
+    Array<int,3> array_char(toto);
     std::cout << "array_char:" << array_char;
 
     Array<int,2> assignement_array;

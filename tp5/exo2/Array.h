@@ -53,7 +53,6 @@ Array<T, ENLARGEMENT>::Array() {
     _head = new T[_capacity];
 }
 
-//TODO l'ide dit qu'il n'est pas appelé. Pourquoi ?
 template<typename T, int ENLARGEMENT>
 Array<T, ENLARGEMENT>::Array(const Array& array) {
     _size = array._size;
@@ -71,7 +70,8 @@ Array<T, ENLARGEMENT>::Array(const T *array) {
         int size = (sizeof(array)/sizeof(T));
         _head = new T[size];
         _size = size;
-        std::cout<< "taille trouvée du tableau : " << size << std::endl; //TODO demander au prof pourquoi ca ne fonctionnne pas
+        //TODO  ça ne fonctionnne pas, la taille trouvée n'est pas bonne.
+        std::cout<< "taille trouvée du tableau : " << size << std::endl;
         _capacity = size;
         for (int i = 0; i < size; ++i) {
             _head[i] = array[i];
@@ -87,7 +87,7 @@ Array<T, ENLARGEMENT>::Array(const T *array) {
 template<typename T, int ENLARGEMENT>
 void Array<T, ENLARGEMENT>::add(const T &element) {
     if (_size == _capacity) {
-        if (ENLARGEMENT == 0) //TODO demanader si c'est valide.
+        if (ENLARGEMENT == 0)
             throw std::invalid_argument("Le tableau ne peut augementer de taille car vous avez mis sa modulation à 0");
 
         enlargeArray();
