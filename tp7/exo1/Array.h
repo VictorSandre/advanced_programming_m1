@@ -7,20 +7,16 @@
 
 #include <ostream>
 #include <iostream>
-#include "Iterator.h"
 
 template <typename T, int ENLARGEMENT>
 class Array;
-
-template<typename T>
-class Iterator;
 
 template <typename T, int ENLARGEMENT>
 std::ostream &operator<<(std::ostream &os, const Array<T,ENLARGEMENT> &array);
 
 template<typename T, int ENLARGEMENT>
 class Array {
-
+    class BackInsertIterator;
 public:
     Array();
 
@@ -42,15 +38,35 @@ public:
 
     friend std::ostream &operator<< <T, ENLARGEMENT> (std::ostream &os, const Array<T,ENLARGEMENT> &array);
 
-    Iterator<T> begin();
-
-    Iterator<T> end();
+    BackInsertIterator backInsertIterator() {
+        return BackInsertIterator(*this);
+    }
 private:
     T* _head;
     int _size;
     int _capacity;
 
     void enlargeArray();
+
+
+    class BackInsertIterator {
+    public:
+        BackInsertIterator(Array<T, ENLARGEMENT>& container) : _container(&container){}
+
+        BackInsertIterator& operator=(const T& value) {
+            _container->add(value);
+            return *this;
+        }
+
+        // Ne sert à rien.
+        const Array& operator*() const { return *this; }
+
+        // Ne sert à rien.
+        BackInsertIterator& operator++() { return *this; }
+
+    private:
+        Array* _container;
+    };
 };
 
 template<typename T, int ENLARGEMENT>
@@ -172,20 +188,6 @@ void Array<T, ENLARGEMENT>::enlargeArray() {
 
     delete [] _head;
     _head = tmpArray;
-}
-
-/**
- * RAJOUT DE LA PARTIE ITERATOR
- */
-
-template<typename T, int ENLARGEMENT>
-Iterator<T> Array<T, ENLARGEMENT>::begin() {
-    return Iterator<T>(_head);
-}
-
-template<typename T, int ENLARGEMENT>
-Iterator<T> Array<T, ENLARGEMENT>::end() {
-    return Iterator<T>(_head+_size);
 }
 
 #endif //EXO2_ARRAY_H

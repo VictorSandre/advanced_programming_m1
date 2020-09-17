@@ -17,7 +17,17 @@ class Iterator;
 
 template <typename T, int ENLARGEMENT>
 std::ostream &operator<<(std::ostream &os, const Array<T,ENLARGEMENT> &array);
-
+/**
+ * Pour faire un itérateur :
+ *  Dans le conteneur :
+ *      mettre la fonction begin et end
+ *  Ensuite :
+ *      déclarer la classe iterateur avant la classe
+ *      définir la lcasse iterateur comme amie au container
+ *      définir la classe itérateur
+ *
+ * A mon avis il est aussi possible de Déclarer l'itérateur dans la partie public du conteneur (en le renaant aussi ami avec celui -i).
+ */
 template<typename T, int ENLARGEMENT>
 class Array {
 
@@ -51,6 +61,7 @@ private:
     int _capacity;
 
     void enlargeArray();
+    friend class Iterator<T>;
 };
 
 template<typename T, int ENLARGEMENT>

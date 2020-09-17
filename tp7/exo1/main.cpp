@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Array.h"
-#include "BackInsertIterator.h"
 
 int main() {
 
@@ -11,8 +10,7 @@ int main() {
     array.add(4);
     std::cout << "affichage du tableau avec le cout : " << array;
 
-    Array<int, 4>* ptr = &array;
-    BackInsertIterator<Array<int,4>> it(array);
+    array.backInsertIterator() = 999;
     std::cout << "affichage du tableau avec le cout : " << array;
 
     return 0;
