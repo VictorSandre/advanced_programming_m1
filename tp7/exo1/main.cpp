@@ -10,6 +10,8 @@ int main() {
     array.add(4);
     std::cout << "affichage du tableau avec le cout : " << array;
 
+    Array<int, 4>::BackInsertIterator it = array.backInsertIterator();
+    it = 66;
     array.backInsertIterator() = 999;
     std::cout << "affichage du tableau avec le cout : " << array;
 

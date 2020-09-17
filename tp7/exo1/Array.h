@@ -16,7 +16,7 @@ std::ostream &operator<<(std::ostream &os, const Array<T,ENLARGEMENT> &array);
 
 template<typename T, int ENLARGEMENT>
 class Array {
-    class BackInsertIterator;
+    //class BackInsertIterator;
 public:
     Array();
 
@@ -38,16 +38,10 @@ public:
 
     friend std::ostream &operator<< <T, ENLARGEMENT> (std::ostream &os, const Array<T,ENLARGEMENT> &array);
 
+    class BackInsertIterator;
     BackInsertIterator backInsertIterator() {
         return BackInsertIterator(*this);
     }
-private:
-    T* _head;
-    int _size;
-    int _capacity;
-
-    void enlargeArray();
-
 
     class BackInsertIterator {
     public:
@@ -67,6 +61,15 @@ private:
     private:
         Array* _container;
     };
+private:
+    T* _head;
+    int _size;
+    int _capacity;
+
+    void enlargeArray();
+
+
+
 };
 
 template<typename T, int ENLARGEMENT>
