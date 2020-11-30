@@ -47,8 +47,7 @@ private:
     char* chars;
 };
 
-String::String() {
-    length = 0;
+String::String() : length(0) {
     chars = new char[1];
     chars[0] = '\0';
 }
@@ -67,15 +66,13 @@ String::String(const char* chars) {
     }
 }
 
-String::String(char cha) {
-    length = 1;
+String::String(char cha) : length(1) {
     chars = new char[2];
     chars[0] = cha;
     chars[1] = '\0';
 }
 
-String::String(const String &string) {
-    length = string.length;
+String::String(const String &string) : length(string.length) {
     chars = new char[length+1];
     std::strcpy(chars, string.chars);
     std::strcat(chars, "\0");

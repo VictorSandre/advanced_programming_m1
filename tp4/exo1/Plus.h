@@ -5,9 +5,9 @@
 #ifndef EXO1_PLUS_H
 #define EXO1_PLUS_H
 
-#include "Expression.h"
+#include "ExpressionBinaire.h"
 
-class Plus : public Expression {
+class Plus : public ExpressionBinaire {
 public:
     Plus(const Expression &lExpr, const Expression &rExpr);
 
@@ -17,12 +17,15 @@ public:
 
     Expression *clone() const override;
 
-    ~Plus() override;
+    ~Plus() override = default;
 };
 
-Plus::Plus(const Expression& lExpr, const Expression& rExpr) {
-    _lexpr = lExpr.clone();
-    _rexpr = rExpr.clone();
+Plus::Plus(const Expression& lExpr, const Expression& rExpr) : ExpressionBinaire(lExpr, rExpr){
+}
+
+Plus::Plus(const Plus &plus) {
+    _lexpr = plus._lexpr->clone();
+    _rexpr = plus._rexpr->clone();
 }
 
 int Plus::eval() const {
@@ -31,18 +34,6 @@ int Plus::eval() const {
 
 Expression *Plus::clone() const {
     return new Plus(*this);
-}
-
-Plus::Plus(const Plus &plus) {
-    _lexpr = plus._lexpr->clone();
-    _rexpr = plus._rexpr->clone();
-}
-
-Plus::~Plus() {
-    if (_lexpr != nullptr)
-        delete _lexpr;
-    if (_rexpr != nullptr)
-        delete _rexpr;
 }
 
 #endif //EXO1_PLUS_H

@@ -5,9 +5,9 @@
 #ifndef EXO1_MULT_H
 #define EXO1_MULT_H
 
-#include "Expression.h"
+#include "ExpressionBinaire.h"
 
-class Mult : public Expression {
+class Mult : public ExpressionBinaire {
 public:
     Mult(const Expression& rExpr, const Expression& lExpr);
 
@@ -17,12 +17,10 @@ public:
 
     Expression *clone() const override;
 
-    ~Mult() override;
+    ~Mult() override = default;
 };
 
-Mult::Mult(const Expression &rExpr, const Expression &lExpr) {
-    _lexpr = lExpr.clone();
-    _rexpr = rExpr.clone();
+Mult::Mult(const Expression &rExpr, const Expression &lExpr) : ExpressionBinaire(lExpr, rExpr){
 }
 
 Mult::Mult(const Mult &mult) {
@@ -38,12 +36,6 @@ Expression *Mult::clone() const {
     return new Mult(*this);
 }
 
-Mult::~Mult() {
-    if (_lexpr != nullptr)
-        delete _lexpr;
-    if (_rexpr != nullptr)
-        delete _rexpr;
-}
 
 
 #endif //EXO1_MULT_H

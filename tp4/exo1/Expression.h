@@ -11,12 +11,7 @@ public:
 
     virtual Expression* clone() const = 0;
 
-    virtual ~Expression();
-protected:
-    Expression* _lexpr;
-    Expression* _rexpr;
+    virtual ~Expression() = default;
 };
-
-Expression::~Expression() {}//TODO doit on quand meme déclarer le destructeur ici vide ?
 
 #endif //EXO1_EXPRESSION_H

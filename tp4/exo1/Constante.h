@@ -9,7 +9,7 @@
 
 class Constante : public Expression {
 public:
-    Constante(int value);
+    explicit Constante(int value);
 
     Constante (const Constante & constante);
 
@@ -17,18 +17,16 @@ public:
 
     Expression *clone() const override;
 
-    ~Constante() override;
+    ~Constante() override = default;
 
 private:
     int value;
 };
 
-Constante::Constante(int value) {
-    this->value = value;
+Constante::Constante(int value) : value(value){
 }
 
-Constante::Constante(const Constante &constante) {
-    value = constante.value;
+Constante::Constante(const Constante &constante) : value(constante.value) {
 }
 
 int Constante::eval() const {
@@ -38,7 +36,5 @@ int Constante::eval() const {
 Expression *Constante::clone() const {
     return new Constante(*this);
 }
-
-Constante::~Constante() {}
 
 #endif //EXO1_CONSTANTE_H

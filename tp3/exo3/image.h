@@ -12,6 +12,8 @@ class Image {
 public:
     Image(int height, int width, bool isGrey);
 
+    Image(int height, int width);
+
     Pixel getPixel(int poxX, int posY) const; //Première façon de faire le mutateur/accesseur.
     void setPixel(int posX, int posY, Pixel& pixel);
 
@@ -37,13 +39,15 @@ private:
     void initAllColoredPixels();
 };
 
-Image::Image(int height, int width, bool isGrey = true) {
-    this->height = height;
-    this->width = width;
+Image::Image(int height, int width, bool isGrey) : height(height), width(width){
     if (isGrey)
         initAllGreyPixels();//TODO demander au prof: ici je fais un downcast et non un upcast non ? comment faire du coup ?
     else
         initAllColoredPixels();
+}
+
+Image::Image(int height, int width) : Image(height, width, true) {
+
 }
 
 void Image::initAllGreyPixels() {

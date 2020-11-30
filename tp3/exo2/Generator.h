@@ -18,9 +18,7 @@ private:
     int multiple;
 };
 
-Generator::Generator(int value) {
-    this->value = value;
-    multiple = 0;
+Generator::Generator(int value) : value(value), multiple(0){
 }
 
 int Generator::operator()() {
